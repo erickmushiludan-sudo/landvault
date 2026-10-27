@@ -1,0 +1,160 @@
+{
+  "entities": {
+    "Listing": {
+      "title": "Land Listing",
+      "description": "A verified land or property listing in Tanzania with photos, video, location, and technical parameters",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the land listing",
+          "minLength": 3,
+          "maxLength": 300
+        },
+        "type": {
+          "type": "string",
+          "description": "Classification of land (Residential, Agricultural, Commercial, Industrial, Mixed Use, etc.)",
+          "maxLength": 50
+        },
+        "status": {
+          "type": "string",
+          "description": "Availability status of the land: available (inauzwa), sold (imeshauzwa), or reserved (imewekewa nafasi)",
+          "enum": ["available", "sold", "reserved"]
+        },
+        "approvalStatus": {
+          "type": "string",
+          "description": "Administrative moderation approval status: approved (published to buyers), pending (awaiting admin review & payment check), or rejected",
+          "enum": ["approved", "pending", "rejected"]
+        },
+        "paymentConfirmed": {
+          "type": "boolean",
+          "description": "Whether listing/listing fee payment between seller and admin has been settled"
+        },
+        "approvedAt": {
+          "type": "string",
+          "description": "Timestamp when admin approved listing for public viewing"
+        },
+        "adminNotes": {
+          "type": "string",
+          "description": "Administrative notes regarding payment or verification"
+        },
+        "price": {
+          "type": "number",
+          "description": "Price in Tanzanian Shillings (TZS)"
+        },
+        "size": {
+          "type": "number",
+          "description": "Size measurement of the land"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of measurement (Ekari, Mita za Mraba, Hekta, etc.)",
+          "maxLength": 50
+        },
+        "region": {
+          "type": "string",
+          "description": "Tanzanian Region where the land is located",
+          "maxLength": 100
+        },
+        "district": {
+          "type": "string",
+          "description": "District in the region",
+          "maxLength": 100
+        },
+        "ward": {
+          "type": "string",
+          "description": "Ward / Kata",
+          "maxLength": 100
+        },
+        "village": {
+          "type": "string",
+          "description": "Village / Mtaa / Kitongoji",
+          "maxLength": 100
+        },
+        "desc": {
+          "type": "string",
+          "description": "Detailed description of the land",
+          "maxLength": 5000
+        },
+        "contact": {
+          "type": "object",
+          "description": "Seller or agent contact information"
+        },
+        "images": {
+          "type": "array",
+          "description": "List of compressed photos or URLs representing the land"
+        },
+        "videoUrl": {
+          "type": "string",
+          "description": "Optional video URL (Uploaded video blob or cloud URL)",
+          "maxLength": 1000000
+        },
+        "videoTitle": {
+          "type": "string",
+          "description": "Title or label for the video tour",
+          "maxLength": 200
+        },
+        "videoFileName": {
+          "type": "string",
+          "description": "Original file name of the uploaded video",
+          "maxLength": 255
+        },
+        "videoSize": {
+          "type": "number",
+          "description": "Size of the uploaded video file in bytes"
+        },
+        "plotNumber": {
+          "type": "string",
+          "description": "Survey plot number / Block number",
+          "maxLength": 100
+        },
+        "beaconsPlaced": {
+          "type": "boolean",
+          "description": "Whether survey beacons/vigingi have been fixed on boundaries"
+        },
+        "leasePeriod": {
+          "type": "string",
+          "description": "Lease duration or tenure status (e.g., Miaka 99, Miaka 66, Kimila)",
+          "maxLength": 100
+        },
+        "paymentTerms": {
+          "type": "string",
+          "description": "Accepted payment conditions (Cash, Awamu, Maelewano)",
+          "maxLength": 100
+        },
+        "waterDetails": {
+          "type": "string",
+          "description": "Specific water source descriptions",
+          "maxLength": 500
+        },
+        "electricityDetails": {
+          "type": "string",
+          "description": "Specific electricity connections descriptions",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of when the listing was created"
+        }
+      },
+      "required": [
+        "title",
+        "type",
+        "price",
+        "size",
+        "unit",
+        "region",
+        "district",
+        "ward",
+        "village",
+        "desc"
+      ]
+    }
+  },
+  "firestore": {
+    "/listings/{listingId}": {
+      "schema": "Listing",
+      "description": "Collection of Tanzanian land listings available on the LandVault marketplace"
+    }
+  }
+}

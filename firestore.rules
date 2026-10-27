@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Land Listings collection
+    match /listings/{listingId} {
+      allow read: if true;
+      allow create: if request.resource.data.title is string
+                    && request.resource.data.title.size() > 0
+                    && request.resource.data.title.size() <= 300
+                    && request.resource.data.price is number
+                    && request.resource.data.price >= 0
+                    && request.resource.data.size is number
+                    && request.resource.data.size > 0
+                    && request.resource.data.type is string;
+      allow update: if request.resource.data.title is string
+                    && request.resource.data.price is number;
+      allow delete: if true;
+    }
+  }
+}

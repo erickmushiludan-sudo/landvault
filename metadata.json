@@ -1,0 +1,6 @@
+{
+  "name": "LandVault",
+  "description": "Tanzania's premier land marketplace supporting scalable cloud storage and real-time low-latency data sync with Firestore.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
